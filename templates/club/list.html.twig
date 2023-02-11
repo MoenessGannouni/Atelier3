@@ -1,0 +1,49 @@
+{% for formation in formations %}
+            <h4>{{ formation.Titre|upper }}</h4>
+        {% endfor %}
+
+<hr/>
+<h5> Nombre de formations: {{ formations|length }} </h5>
+
+<hr/>
+{% for formation in formations %}
+            {% if formation.Description == 'formation theorique' %}
+                <h4> {{ formation.Titre }} <h4>
+            {% endif %}    
+        {% endfor %}
+<hr/>
+
+{% set list = [] %}
+        {% for formation in formations %}
+            {% set list = list|merge([formation.nb_participants]) %}
+        {% endfor %}
+        {% for formation in formations %}
+            {% if formation.nb_participants == max(list) %}
+                <h4>{{ formation.Titre }}</h4>
+            {% endif %}
+        {% endfor %}
+<hr/>
+
+<h5> Le nombre total de participants dans toutes les formations: </h5>
+{% set somme = 0 %}
+{% for formation in formations %}
+         {% set somme = somme + formation.nb_participants %}
+{% endfor %}
+<h5> {{ somme }} </h5>
+<hr/>
+
+{% set list = [] %}
+{% for formation in list %}
+            <h4>{{ formation }}</h4>
+{% else %} le tableau n’est pas défini et/ou vide.
+        {% endfor %}
+<hr/>
+
+{% for formation in formations %}
+        {% if formation.nb_participants == 0 %}
+            {{ formation.Titre }}  <button> <a href="{{ path ('get_name', {'nom' : formation.Titre})}}" >participer</a> </button>
+        {% endif %}
+{% endfor %}
+<hr/> 
+
+
