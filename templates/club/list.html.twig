@@ -6,8 +6,11 @@
 <h5> Nombre de formations: {{ formations|length }} </h5>
 
 <hr/>
+
+
+
 {% for formation in formations %}
-            {% if formation.Description == 'formation theorique' %}
+            {% if 'theorique' in formation.Description %}
                 <h4> {{ formation.Titre }} <h4>
             {% endif %}    
         {% endfor %}
